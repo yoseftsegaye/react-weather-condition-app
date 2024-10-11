@@ -40,10 +40,10 @@ function Details({ weather: { details, icon, temp, feels_like, temp_min, temp_ma
                 <img src={weather_icon} alt="" className='w-13' />
             </div>
 
-            <div className='ms-10 flex flex-row items-center justify-between text-white '>
-                <p className='text-4xl'> {temprature}°</p>
+            <div className='ms-1 md:ms-5 lg:ms-20 flex flex-row items-center justify-between text-white '>
+                <p className='text-4xl pr-2'> {temprature}°</p>
 
-                <div className=' flex items-center justify-center text-xl'>
+                <div className=' flex items-center justify-center text-xl pr-2'>
                     <p>{details}</p>
                 </div>
 
@@ -68,7 +68,7 @@ function Details({ weather: { details, icon, temp, feels_like, temp_min, temp_ma
                 </div>
             </div>
 
-            <div className='flex flex-row items-center justify-center space-x-2 text-white text-sm py-3'>
+            <div className='flex flex-wrap items-center justify-center space-x-2 text-white text-sm py-3'>
                 <UilSun />
                 <p className='font-light'>Rise:
                     <span className='font-medium ml-1'>06:45 AM</span>

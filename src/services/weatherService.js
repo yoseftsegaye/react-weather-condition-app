@@ -6,7 +6,12 @@ const weatherData = (infoType, searchParams) => {
     url.search = new URLSearchParams({ ...searchParams, appid: API_KEY });
 
     return fetch(url)
-        .then((res) => res.json())
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error('City not found');
+            }
+            return res.json();
+        });
 };
 
 const formatCurrentWeather = (data) => {
@@ -29,11 +34,14 @@ const formatCurrentWeather = (data) => {
 }
 
 const getFormattedWeatherData = async (searchParams) => {
-    const formattedCurrentWeather = await weatherData(
-        'weather', searchParams).then(formatCurrentWeather)
+    try {
+        const formattedCurrentWeather = await weatherData(
+            'weather', searchParams).then(formatCurrentWeather)
 
-    return formattedCurrentWeather
-
+        return formattedCurrentWeather;
+    } catch (error) {
+        alert(error.message); // Display alert when city is not found
+    }
 };
 
-export default getFormattedWeatherData
+export default getFormattedWeatherData;

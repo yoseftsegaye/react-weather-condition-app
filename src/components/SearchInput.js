@@ -31,14 +31,14 @@ function SearchInput({ setCity, units, setUnits }) {
     }
 
     return (
-        <div className='ms-10 flex  flex-row justify-center my-3'>
-            <div className="flex flex-row w-3/4 items-center justify-center space-x-4">
+        <div className='ms-2 flex flex-row justify-center my-3'>
+            <div className="flex flex-row w-[100%] items-center justify-center space-x-4">
                 <input
                     value={query}
                     onChange={(e) => setQuery(e.currentTarget.value)}
                     type="text"
                     placeholder='search for city...'
-                    className='text-xl font-light p-2 w-full shadow-xl focus:outline-none capitalize placeholder:lowercase'
+                    className='text-[100%] font-light p-2 w-full shadow-xl focus:outline-none capitalize placeholder:lowercase'
                 />
                 <UilSearch
                     size={30}
@@ -52,7 +52,7 @@ function SearchInput({ setCity, units, setUnits }) {
                 />
             </div>
 
-            <div className='flex flex-row w-1/2 items-center justify-center'>
+            <div className='ms-1 flex flex-row w-1/2 items-center justify-center'>
                 <button
                     name='metric'
                     className='text-xl text-white font-light transition ease-out hover:scale-125'
