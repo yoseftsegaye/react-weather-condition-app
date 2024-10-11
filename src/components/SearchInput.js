@@ -23,7 +23,6 @@ function SearchInput({ setCity, units, setUnits }) {
             });
         }
     }
-
     const handleUnitChange = (e) => {
         const selectedUnit = e.currentTarget.name;
         if (units !== selectedUnit)

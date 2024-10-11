@@ -11,8 +11,9 @@ import clear_icon from '../Assets/clear.png'
 import cloud_icon from '../Assets/cloud.png'
 import drizzle_icon from '../Assets/drizzle.png'
 import snow_icon from '../Assets/snow.png'
+import { formatToLocalTime } from '../services/weatherService';
 
-function Details({ weather: { details, icon, temp, feels_like, temp_min, temp_max, humidity, sunrise, sunset, speed } }) {
+function Details({ weather: { details, icon, temp, feels_like, temp_min, temp_max, humidity, sunrise, sunset, speed, timezone }, units }) {
 
     const allIcons = {
         "01d": clear_icon,
@@ -31,6 +32,12 @@ function Details({ weather: { details, icon, temp, feels_like, temp_min, temp_ma
         "13n": snow_icon,
     }
 
+    var degree = ""
+    if (units === "metric")
+        degree = "C"
+    if (units === "imperial")
+        degree = "F"
+
     const weather_icon = allIcons[icon]
     const temprature = Math.floor(temp)
 
@@ -41,26 +48,26 @@ function Details({ weather: { details, icon, temp, feels_like, temp_min, temp_ma
             </div>
 
             <div className='ms-1 md:ms-5 lg:ms-20 flex flex-row items-center justify-between text-white '>
-                <p className='text-4xl pr-2'> {temprature}°</p>
+                <p className='text-4xl pr-2'> {temprature}°{degree}</p>
 
                 <div className=' flex items-center justify-center text-xl pr-2'>
                     <p>{details}</p>
                 </div>
 
                 <div className=' flex flex-col space-y-2'>
-                    <div className='flex font-light items-center justify-center text-sm'>
+                    <div className='flex flex-wrap font-light items-center justify-center text-sm'>
                         <UilTemperature size={20} className='mr-1' />
                         Real fell:
-                        <span className='font-medium ml-1' />{`${feels_like.toFixed()}`}<span />
+                        <span className='font-medium ml-1' />{`${feels_like.toFixed()}°`}{degree}<span />
                     </div>
 
-                    <div className='flex font-light items-center justify-center text-sm'>
+                    <div className='flex flex-wrap font-light items-center justify-center text-sm'>
                         <UilTear size={20} className='mr-1' />
                         Humidity:
                         <span className='font-medium ml-1' />{`${humidity.toFixed()}`}<span />
                     </div>
 
-                    <div className='flex font-light items-center justify-center text-sm'>
+                    <div className='flex flex-wrap font-light items-center justify-center text-sm'>
                         <UilWind size={20} className='mr-1' />
                         wind :
                         <span className='font-medium ml-1' />{`${speed.toFixed()} km/h`}<span />
@@ -71,25 +78,25 @@ function Details({ weather: { details, icon, temp, feels_like, temp_min, temp_ma
             <div className='flex flex-wrap items-center justify-center space-x-2 text-white text-sm py-3'>
                 <UilSun />
                 <p className='font-light'>Rise:
-                    <span className='font-medium ml-1'>06:45 AM</span>
+                    <span className='font-medium ml-1'>{formatToLocalTime(sunrise, timezone, "hh:mm a")}</span>
                 </p>
                 <p className='font-light'>|</p>
 
                 <UilSunset />
                 <p className='font-light'>Set:
-                    <span className='font-medium ml-1'>07:45 PM</span>
+                    <span className='font-medium ml-1'>{formatToLocalTime(sunset, timezone, "hh:mm a")}</span>
                 </p>
                 <p className='font-light'>|</p>
 
                 <UilSun />
                 <p className='font-light'>High:
-                    <span className='font-medium ml-1'>{`${temp_max.toFixed()}°`}</span>
+                    <span className='font-medium ml-1'>{`${temp_max.toFixed()}°`}{degree}</span>
                 </p>
                 <p className='font-light'>|</p>
 
                 <UilSun />
                 <p className='font-light'>Low:
-                    <span className='font-medium ml-1'>{`${temp_min.toFixed()}°`}</span>
+                    <span className='font-medium ml-1'>{`${temp_min.toFixed()}°`}{degree}</span>
                 </p>
             </div>
 
